@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MADA LIFT - Vente, Location et Maintenance de Chariots Élévateurs à Madagascar">
+    <title>MADA LIFT — L'Excellence en Manutention à Madagascar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+        :root {
+            --gold:      #C9A640;
+            --gold-dk:   #A8892E;
+            --dark:      #1A1C22;
+            --dark2:     #111318;
+            --white:     #FFFFFF;
+            --gray:      #999;
+            --nav-h:     72px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: var(--white);
+            height: var(--nav-h);
+            box-shadow: 0 2px 16px rgba(0,0,0,.10);
+        }
+
+        .navbar .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* ---------- LOGO ---------- */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+
+        /* SVG oval badge logo */
+        .logo svg { width: 90px; height: 56px; }
+
+        /* ---------- NAV LINKS ---------- */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .nav-links li { display: flex; align-items: center; }
+        .nav-links li + li::before {
+            content: '|';
+            color: #ccc;
+            font-size: .7rem;
+            margin: 0 4px;
+        }
+        .nav-link {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .8px;
+            color: #222;
+            padding: 6px 10px;
+            transition: color .25s;
+            position: relative;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            width: 0; height: 2px;
+            background: var(--gold);
+            transform: translateX(-50%);
+            transition: width .25s;
+        }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        .nav-link:hover::after, .nav-link.active::after { width: 70%; }
+
+        /* ---------- CTA BUTTON ---------- */
+        .btn-rdv {
+            flex-shrink: 0;
+            background: var(--gold);
+            color: var(--white);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 11px 20px;
+            border-radius: 3px;
+            white-space: nowrap;
+            transition: background .25s, transform .25s;
+        }
+        .btn-rdv:hover { background: var(--gold-dk); transform: translateY(-1px); }
+
+        /* ---------- HAMBURGER ---------- */
+        .hamburger {
+            display: none;
+            flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #222; border-radius: 2px; transition: .25s; }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+        #hero {
+            position: relative;
+            height: 100vh;
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: var(--nav-h);
+            overflow: hidden;
+
+            /*
+             * ➜ REMPLACEZ 'assets/hero.jpg' par votre photo d'entrepôt.
+             *   L'image doit montrer des chariots élévateurs MADA dans un entrepôt.
+             */
+            background:
+                linear-gradient(to bottom, rgba(10,12,18,.78) 0%, rgba(10,12,18,.65) 60%, rgba(10,12,18,.82) 100%),
+                url('assets/hero.jpg') center center / cover no-repeat;
+            background-color: var(--dark2);
+        }
+
+        /* Subtle light-ray effect even without a real image */
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 70% at 50% 40%, rgba(201,166,64,.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            padding: 0 16px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-sub {
+            font-size: clamp(.88rem, 1.4vw, 1rem);
+            font-weight: 400;
+            color: rgba(255,255,255,.82);
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        .hero-btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero-gold {
+            background: var(--gold);
+            color: var(--white);
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 13px 28px;
+            border-radius: 3px;
+            border: 2px solid var(--gold);
+            transition: background .25s, transform .25s, box-shadow .25s;
+        }
+        .btn-hero-gold:hover {
+            background: var(--gold-dk);
+            border-color: var(--gold-dk);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201,166,64,.35);
+        }
+
+        .btn-hero-outline {
+            background: transparent;
+            color: var(--white);
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 12px 28px;
+            border-radius: 3px;
+            border: 2px solid rgba(255,255,255,.65);
+            transition: background .25s, border-color .25s, transform .25s;
+        }
+        .btn-hero-outline:hover {
+            background: var(--white);
+            color: var(--dark);
+            border-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* =====================================================
+           3 SERVICE CARDS
+        ===================================================== */
+        .cards-section {
+            background: var(--white);
+        }
+
+        .cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 42px 36px;
+            border-top: 3px solid transparent;
+            border-right: 1px solid #e8e8e8;
+            transition: border-top-color .3s, background .3s;
+            cursor: pointer;
+        }
+        .card:last-child { border-right: none; }
+        .card:hover { border-top-color: var(--gold); background: #fafafa; }
+
+        .card-icon {
+            flex-shrink: 0;
+            width: 54px; height: 54px;
+            border: 2px solid var(--gold);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .3s;
+        }
+        .card-icon i { font-size: 1.5rem; color: var(--gold); transition: color .3s; }
+        .card:hover .card-icon { background: var(--gold); }
+        .card:hover .card-icon i { color: var(--white); }
+
+        .card-title {
+            font-size: .85rem;
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            line-height: 1.35;
+            margin-bottom: 8px;
+        }
+        .card-text {
+            font-size: .8rem;
+            font-weight: 400;
+            color: var(--gray);
+            line-height: 1.65;
+            margin-bottom: 14px;
+        }
+        .card-more {
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap .25s;
+        }
+        .card:hover .card-more { gap: 10px; }
+
+        /* =====================================================
+           FOOTER STRIP
+        ===================================================== */
+        .footer {
+            background: #252525;
+            padding: 18px 0;
+        }
+
+        .footer .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-contact {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-contact span {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            color: rgba(255,255,255,.75);
+        }
+        .footer-contact span i { color: var(--gold); margin-right: 5px; }
+        .footer-sep { color: rgba(255,255,255,.25); font-size: .8rem; }
+
+        .footer-socials { display: flex; gap: 8px; }
+        .soc-icon {
+            width: 30px; height: 30px;
+            background: rgba(255,255,255,.08);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.6);
+            font-size: .76rem;
+            transition: background .25s, color .25s;
+        }
+        .soc-icon:hover { background: var(--gold); color: var(--white); }
+
+        .footer-copy {
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            color: rgba(255,255,255,.4);
+            text-transform: uppercase;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+        @media (max-width: 900px) {
+            .cards-row { grid-template-columns: 1fr; }
+            .card { border-right: none; border-bottom: 1px solid #eee; }
+            .card:last-child { border-bottom: none; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links, .btn-rdv {
+                display: none;
+                pointer-events: none;
+            }
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: var(--nav-h);
+                left: 0; right: 0; bottom: 0;
+                background: var(--white);
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                pointer-events: all;
+                z-index: 99;
+            }
+            .nav-links.mobile-open .nav-link { font-size: 1rem; padding: 14px 24px; }
+            .nav-links.mobile-open li + li::before { display: none; }
+            .footer .container { justify-content: center; text-align: center; }
+            .footer-contact { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-btns { flex-direction: column; align-items: stretch; }
+            .btn-hero-gold, .btn-hero-outline { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════ -->
+<nav class="navbar">
+    <div class="container">
+
+        <!-- LOGO — badge ovale or -->
+        <a href="#hero" class="logo" aria-label="MADA LIFT Accueil">
+            <svg viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer oval -->
+                <ellipse cx="65" cy="39" rx="62" ry="36" stroke="#C9A640" stroke-width="2"/>
+                <!-- Inner oval (double border effect) -->
+                <ellipse cx="65" cy="39" rx="57" ry="31" stroke="#C9A640" stroke-width=".8" opacity=".5"/>
+                <!-- Decorative top line -->
+                <line x1="28" y1="22" x2="102" y2="22" stroke="#C9A640" stroke-width=".6" opacity=".35"/>
+                <!-- Decorative bottom line -->
+                <line x1="28" y1="56" x2="102" y2="56" stroke="#C9A640" stroke-width=".6" opacity=".35"/>
+                <!-- "Mada" script text -->
+                <text x="65" y="44"
+                      text-anchor="middle"
+                      font-family="Georgia, 'Times New Roman', serif"
+                      font-size="24"
+                      font-style="italic"
+                      font-weight="700"
+                      fill="#C9A640"
+                      letter-spacing="-1">Mada</text>
+                <!-- "LIFT" uppercase small -->
+                <text x="65" y="57"
+                      text-anchor="middle"
+                      font-family="'Montserrat', Arial, sans-serif"
+                      font-size="8.5"
+                      font-weight="700"
+                      fill="#C9A640"
+                      letter-spacing="5">LIFT</text>
+                <!-- ® symbol -->
+                <text x="101" y="20"
+                      font-family="Arial, sans-serif"
+                      font-size="8"
+                      fill="#C9A640">®</text>
+            </svg>
+        </a>
+
+        <!-- NAV LINKS -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero"      class="nav-link active">ACCUEIL</a></li>
+            <li><a href="#gamme"     class="nav-link">NOTRE GAMME</a></li>
+            <li><a href="#services"  class="nav-link">SERVICES</a></li>
+            <li><a href="#occasions" class="nav-link">OCCASIONS</a></li>
+            <li><a href="#contact"   class="nav-link">CONTACT</a></li>
+        </ul>
+
+        <!-- CTA -->
+        <a href="#contact" class="btn-rdv">PRENDRE RENDEZ-VOUS</a>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="ham" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+    <div class="hero-inner">
+        <h1 class="hero-title">
+            L'EXCELLENCE EN MANUTENTION<br>À MADAGASCAR
+        </h1>
+        <p class="hero-sub">
+            Vente, Location, Maintenance de Chariots Élévateurs<br>
+            et Équipements de Levage.
+        </p>
+        <div class="hero-btns">
+            <a href="#gamme"   class="btn-hero-gold">VOIR NOS MODÈLES</a>
+            <a href="#contact" class="btn-hero-outline">DEMANDER UN DEVIS</a>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     3 CARDS
+════════════════════════════════════════ -->
+<section class="cards-section" id="gamme">
+    <div class="cards-row">
+
+        <a href="#gamme-detail" class="card">
+            <div class="card-icon">
+                <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Vente Neuf<br>&amp; Occasion</div>
+                <p class="card-text">Large choix de modèles adaptés.</p>
+                <span class="card-more">EN SAVOIR PLUS <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></span>
+            </div>
+        </a>
+
+        <a href="#services" class="card">
+            <div class="card-icon">
+                <i class="fas fa-screwdriver-wrench"></i>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Service<br>Maintenance</div>
+                <p class="card-text">Interventions rapides et pièces d'origine.</p>
+                <span class="card-more">EN SAVOIR PLUS <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></span>
+            </div>
+        </a>
+
+        <a href="#location" class="card">
+            <div class="card-icon">
+                <i class="fas fa-calendar-days"></i>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Location<br>Fluide</div>
+                <p class="card-text">Solutions flexibles courte et longue durée.</p>
+                <span class="card-more">EN SAVOIR PLUS <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER STRIP
+════════════════════════════════════════ -->
+<footer class="footer" id="contact">
+    <div class="container">
+
+        <div class="footer-contact">
+            <span>CONTMIT MADA LIFT</span>
+            <span class="footer-sep">|</span>
+            <span><i class="fas fa-phone"></i>+33 349 21 79</span>
+            <span class="footer-sep">|</span>
+            <span><i class="fas fa-phone"></i>+44 (13) 238 39 19</span>
+        </div>
+
+        <div class="footer-socials">
+            <a href="#" class="soc-icon" aria-label="Facebook">  <i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="soc-icon" aria-label="Twitter">   <i class="fab fa-twitter"></i></a>
+            <a href="#" class="soc-icon" aria-label="LinkedIn">  <i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="soc-icon" aria-label="Instagram"> <i class="fab fa-instagram"></i></a>
+        </div>
+
+        <p class="footer-copy">© 2024 MADA LIFT. TOUS DROITS RÉSERVÉS.</p>
+
+    </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JS
+════════════════════════════════════════ -->
+<script>
+    /* Hamburger */
+    const ham   = document.getElementById('ham');
+    const links = document.getElementById('navLinks');
+    ham.addEventListener('click', () => {
+        ham.classList.toggle('open');
+        links.classList.toggle('mobile-open');
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        ham.classList.remove('open');
+        links.classList.remove('mobile-open');
+    }));
+
+    /* Active nav on scroll */
+    const navAs = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY + 80;
+        document.querySelectorAll('section[id], footer[id]').forEach(s => {
+            if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight)
+                navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + s.id));
+        });
+    });
+</script>
+</body>
+</html>

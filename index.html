@@ -7,570 +7,892 @@
     <title>MADA LIFT — L'Excellence en Manutention à Madagascar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <style>
-        /* =====================================================
+        /* ================================================
+           VARIABLES
+        ================================================ */
+        :root {
+            --gold:        #C9A640;
+            --gold-dark:   #A8892E;
+            --gold-light:  #DDB84E;
+            --dark:        #1C1C1C;
+            --dark-2:      #252525;
+            --anthracite:  #333333;
+            --white:       #FFFFFF;
+            --light:       #F7F7F7;
+            --gray:        #888888;
+            --shadow:      0 4px 24px rgba(0,0,0,.10);
+            --shadow-lg:   0 10px 48px rgba(0,0,0,.18);
+            --t:           all .3s ease;
+            --r:           5px;
+        }
+
+        /* ================================================
            RESET
-        ===================================================== */
+        ================================================ */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--anthracite); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+        h1,h2,h3,h4,h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* =====================================================
-           VARIABLES
-        ===================================================== */
-        :root {
-            --gold:      #C9A640;
-            --gold-dk:   #A8892E;
-            --dark:      #1A1C22;
-            --dark2:     #111318;
-            --white:     #FFFFFF;
-            --gray:      #999;
-            --nav-h:     72px;
-        }
+        .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px;
+        /* ================================================
+           BUTTONS
+        ================================================ */
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: .78rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+            border-radius: var(--r);
+            cursor: pointer;
+            transition: var(--t);
         }
+        .btn-gold  { background: var(--gold); color: var(--white); border-color: var(--gold); }
+        .btn-gold:hover { background: var(--gold-dark); border-color: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,166,64,.35); }
+        .btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.7); }
+        .btn-outline:hover { background: var(--white); color: var(--dark); border-color: var(--white); transform: translateY(-2px); }
+        .btn-border-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
+        .btn-border-gold:hover { background: var(--gold); color: var(--white); transform: translateY(-2px); }
 
-        /* =====================================================
-           NAVBAR
-        ===================================================== */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            background: var(--white);
-            height: var(--nav-h);
-            box-shadow: 0 2px 16px rgba(0,0,0,.10);
-        }
+        /* ================================================
+           SECTION HELPERS
+        ================================================ */
+        .section { padding: 96px 0; }
+        .bg-light { background: var(--light); }
 
-        .navbar .container {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        /* ---------- LOGO ---------- */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0;
-            flex-shrink: 0;
-        }
-
-        /* SVG oval badge logo */
-        .logo svg { width: 90px; height: 56px; }
-
-        /* ---------- NAV LINKS ---------- */
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 0;
-        }
-        .nav-links li { display: flex; align-items: center; }
-        .nav-links li + li::before {
-            content: '|';
-            color: #ccc;
-            font-size: .7rem;
-            margin: 0 4px;
-        }
-        .nav-link {
+        .section-label {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
             font-size: .72rem;
             font-weight: 700;
-            letter-spacing: .8px;
-            color: #222;
-            padding: 6px 10px;
-            transition: color .25s;
-            position: relative;
-            white-space: nowrap;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 50%;
-            width: 0; height: 2px;
-            background: var(--gold);
-            transform: translateX(-50%);
-            transition: width .25s;
-        }
-        .nav-link:hover, .nav-link.active { color: var(--gold); }
-        .nav-link:hover::after, .nav-link.active::after { width: 70%; }
-
-        /* ---------- CTA BUTTON ---------- */
-        .btn-rdv {
-            flex-shrink: 0;
-            background: var(--gold);
-            color: var(--white);
-            font-size: .7rem;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            padding: 11px 20px;
-            border-radius: 3px;
-            white-space: nowrap;
-            transition: background .25s, transform .25s;
-        }
-        .btn-rdv:hover { background: var(--gold-dk); transform: translateY(-1px); }
-
-        /* ---------- HAMBURGER ---------- */
-        .hamburger {
-            display: none;
-            flex-direction: column; gap: 5px;
-            background: none; border: none; cursor: pointer; padding: 4px;
-        }
-        .hamburger span { display: block; width: 24px; height: 2px; background: #222; border-radius: 2px; transition: .25s; }
-        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-        #hero {
-            position: relative;
-            height: 100vh;
-            min-height: 560px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: var(--nav-h);
-            overflow: hidden;
-
-            /*
-             * ➜ REMPLACEZ 'assets/hero.jpg' par votre photo d'entrepôt.
-             *   L'image doit montrer des chariots élévateurs MADA dans un entrepôt.
-             */
-            background:
-                linear-gradient(to bottom, rgba(10,12,18,.78) 0%, rgba(10,12,18,.65) 60%, rgba(10,12,18,.82) 100%),
-                url('assets/hero.jpg') center center / cover no-repeat;
-            background-color: var(--dark2);
-        }
-
-        /* Subtle light-ray effect even without a real image */
-        #hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 60% 70% at 50% 40%, rgba(201,166,64,.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 2;
-            max-width: 760px;
-            padding: 0 16px;
-        }
-
-        .hero-title {
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            font-weight: 900;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: -.5px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero-sub {
-            font-size: clamp(.88rem, 1.4vw, 1rem);
-            font-weight: 400;
-            color: rgba(255,255,255,.82);
-            line-height: 1.75;
-            margin-bottom: 36px;
-        }
-
-        .hero-btns {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn-hero-gold {
-            background: var(--gold);
-            color: var(--white);
-            font-size: .74rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 13px 28px;
-            border-radius: 3px;
-            border: 2px solid var(--gold);
-            transition: background .25s, transform .25s, box-shadow .25s;
-        }
-        .btn-hero-gold:hover {
-            background: var(--gold-dk);
-            border-color: var(--gold-dk);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201,166,64,.35);
-        }
-
-        .btn-hero-outline {
-            background: transparent;
-            color: var(--white);
-            font-size: .74rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 12px 28px;
-            border-radius: 3px;
-            border: 2px solid rgba(255,255,255,.65);
-            transition: background .25s, border-color .25s, transform .25s;
-        }
-        .btn-hero-outline:hover {
-            background: var(--white);
-            color: var(--dark);
-            border-color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        /* =====================================================
-           3 SERVICE CARDS
-        ===================================================== */
-        .cards-section {
-            background: var(--white);
-        }
-
-        .cards-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .card {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 42px 36px;
-            border-top: 3px solid transparent;
-            border-right: 1px solid #e8e8e8;
-            transition: border-top-color .3s, background .3s;
-            cursor: pointer;
-        }
-        .card:last-child { border-right: none; }
-        .card:hover { border-top-color: var(--gold); background: #fafafa; }
-
-        .card-icon {
-            flex-shrink: 0;
-            width: 54px; height: 54px;
-            border: 2px solid var(--gold);
-            border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            transition: background .3s;
-        }
-        .card-icon i { font-size: 1.5rem; color: var(--gold); transition: color .3s; }
-        .card:hover .card-icon { background: var(--gold); }
-        .card:hover .card-icon i { color: var(--white); }
-
-        .card-title {
-            font-size: .85rem;
-            font-weight: 800;
-            letter-spacing: .5px;
-            text-transform: uppercase;
-            color: #1a1a1a;
-            line-height: 1.35;
-            margin-bottom: 8px;
-        }
-        .card-text {
-            font-size: .8rem;
-            font-weight: 400;
-            color: var(--gray);
-            line-height: 1.65;
-            margin-bottom: 14px;
-        }
-        .card-more {
-            font-size: .68rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: gap .25s;
+            margin-bottom: 10px;
         }
-        .card:hover .card-more { gap: 10px; }
+        .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--dark); line-height: 1.2; margin-bottom: 14px; }
+        .section-title span { color: var(--gold); }
+        .section-sub { font-size: .95rem; color: var(--gray); max-width: 540px; margin: 0 auto; }
+        .section-hd { text-align: center; margin-bottom: 56px; }
+        .divider { width: 52px; height: 3px; background: var(--gold); margin: 18px auto 0; }
 
-        /* =====================================================
-           FOOTER STRIP
-        ===================================================== */
-        .footer {
+        /* ================================================
+           FADE ANIMATION
+        ================================================ */
+        .fade { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+        .fade.in { opacity: 1; transform: none; }
+        .fade:nth-child(2) { transition-delay: .1s; }
+        .fade:nth-child(3) { transition-delay: .2s; }
+
+        /* ================================================
+           NAVBAR — split sombre (logo) / blanc (liens)
+        ================================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: stretch;
+            height: 80px;
+            box-shadow: 0 3px 24px rgba(0,0,0,.18);
+        }
+
+        /* Partie gauche sombre avec coupe diagonale */
+        .nav-brand {
             background: #252525;
-            padding: 18px 0;
+            display: flex; align-items: center;
+            padding: 0 56px 0 28px;
+            flex-shrink: 0;
+            position: relative; z-index: 2;
+            /* Coupe diagonale sur le bord droit */
+            clip-path: polygon(0 0, 100% 0, calc(100% - 38px) 100%, 0 100%);
         }
 
-        .footer .container {
+        /* Logo */
+        .logo { display: flex; align-items: center; }
+        .logo-img { height: 60px; width: auto; display: block; object-fit: contain; max-width: 210px; }
+
+        /* Partie droite blanche */
+        .nav-body {
+            flex: 1;
+            background: var(--white);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 28px 0 14px;
+        }
+
+        /* Nav links */
+        .nav-links { display: flex; align-items: center; }
+        .nav-links li { display: flex; align-items: center; }
+        .nav-links li:not(:last-child)::after { content: '|'; color: #ccc; font-size: .7rem; margin: 0 2px; }
+        .nav-link {
+            font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 600;
+            letter-spacing: .5px; color: var(--dark); padding: 6px 10px;
+            transition: var(--t); position: relative;
+        }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--gold); transform: translateX(-50%); transition: width .3s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        .nav-link:hover::after, .nav-link.active::after { width: 75%; }
+
+        /* Hamburger (mobile) */
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px 14px; }
+        .hamburger span { display: block; width: 25px; height: 2px; background: var(--dark); transition: var(--t); border-radius: 2px; }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ================================================
+           HERO
+        ================================================ */
+        #accueil {
+            position: relative;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
+            padding-top: 80px;
+            /* ➜ Remplacez 'assets/hero-bg.jpg' par votre photo d'entrepôt */
+            background: linear-gradient(110deg, rgba(15,15,15,.95) 0%, rgba(25,25,25,.85) 55%, rgba(15,15,15,.75) 100%),
+                        url('assets/hero-bg.jpg') center / cover no-repeat;
+            background-color: var(--dark-2);
         }
+        .hero-grid {
+            position: absolute; inset: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(201,166,64,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201,166,64,.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-glow {
+            position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(ellipse at 20% 60%, rgba(201,166,64,.07) 0%, transparent 55%);
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 820px; margin: 0 auto;
+            text-align: center; padding: 40px 16px;
+        }
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 900; color: var(--white);
+            text-transform: uppercase; letter-spacing: -1px; line-height: 1.08; margin-bottom: 20px;
+        }
+        .hero-sub {
+            font-size: clamp(.95rem, 1.6vw, 1.1rem); color: rgba(255,255,255,.85);
+            max-width: 560px; line-height: 1.75; margin: 0 auto 36px;
+        }
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+        .hero-btns .btn i { margin-right: 7px; }
 
-        .footer-contact {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .footer-contact span {
-            font-size: .72rem;
-            font-weight: 600;
-            letter-spacing: .5px;
-            color: rgba(255,255,255,.75);
-        }
-        .footer-contact span i { color: var(--gold); margin-right: 5px; }
-        .footer-sep { color: rgba(255,255,255,.25); font-size: .8rem; }
 
-        .footer-socials { display: flex; gap: 8px; }
-        .soc-icon {
-            width: 30px; height: 30px;
-            background: rgba(255,255,255,.08);
-            border-radius: 50%;
+        /* ================================================
+           SERVICE CARDS (directly below hero)
+        ================================================ */
+        .cards-strip { background: var(--white); padding: 0 0 64px; }
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            background: #e4e4e4; gap: 1px;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .scard {
+            background: var(--white); padding: 36px 28px;
+            display: flex; align-items: flex-start; gap: 18px;
+            transition: var(--t); cursor: pointer;
+        }
+        .scard:hover { background: #fafafa; }
+        .scard-icon {
+            flex-shrink: 0; width: 58px; height: 58px;
+            border: 2px solid var(--gold); border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,.6);
-            font-size: .76rem;
-            transition: background .25s, color .25s;
+            transition: var(--t);
         }
-        .soc-icon:hover { background: var(--gold); color: var(--white); }
+        .scard-icon i { font-size: 1.5rem; color: var(--gold); transition: var(--t); }
+        .scard:hover .scard-icon { background: var(--gold); }
+        .scard:hover .scard-icon i { color: var(--white); }
+        .scard-title { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 800; text-transform: uppercase; color: var(--dark); margin-bottom: 7px; line-height: 1.3; }
+        .scard-text { font-size: .82rem; color: var(--gray); line-height: 1.65; margin-bottom: 13px; }
+        .scard-link { font-family: 'Montserrat', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 6px; }
+        .scard-link i { transition: transform .3s ease; }
+        .scard:hover .scard-link i { transform: translateX(4px); }
 
-        .footer-copy {
-            font-size: .68rem;
-            font-weight: 600;
-            letter-spacing: .5px;
-            color: rgba(255,255,255,.4);
-            text-transform: uppercase;
+        /* ================================================
+           NOTRE GAMME
+        ================================================ */
+        .gamme-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+        .gcard { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--t); }
+        .gcard:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .gcard-img {
+            height: 198px;
+            background: linear-gradient(135deg, #111, #2a2a2a);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+            position: relative;
         }
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-        @media (max-width: 900px) {
-            .cards-row { grid-template-columns: 1fr; }
-            .card { border-right: none; border-bottom: 1px solid #eee; }
-            .card:last-child { border-bottom: none; }
+        .gcard-img i { font-size: 3.6rem; color: var(--gold); opacity: .75; }
+        .gcard-img span { font-size: .68rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.3); }
+        .gbadge {
+            position: absolute; top: 12px; right: 12px;
+            background: var(--gold); color: var(--white);
+            font-family: 'Montserrat', sans-serif; font-size: .62rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
         }
+        .gcard-body { padding: 22px 22px 26px; }
+        .gcat { font-size: .68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+        .gname { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 9px; }
+        .gdesc { font-size: .83rem; color: var(--gray); line-height: 1.65; margin-bottom: 16px; }
+        .gtags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+        .gtag { background: var(--light); border: 1px solid #e2e2e2; font-size: .7rem; padding: 3px 10px; border-radius: 20px; color: var(--gray); }
 
+        /* ================================================
+           SERVICES
+        ================================================ */
+        .srv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+        .srv-img-wrap { position: relative; }
+        .srv-img {
+            width: 100%; height: 440px;
+            background: linear-gradient(135deg, #191919, #2e2e2e);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .srv-img i { font-size: 6rem; color: var(--gold); opacity: .55; }
+        .srv-badge {
+            position: absolute; bottom: -18px; right: -18px;
+            background: var(--gold); color: var(--white);
+            padding: 18px 22px; border-radius: 8px; text-align: center;
+            box-shadow: 0 8px 32px rgba(201,166,64,.4);
+        }
+        .srv-badge .big { font-family: 'Montserrat', sans-serif; font-size: 2.4rem; font-weight: 900; display: block; line-height: 1; }
+        .srv-badge .sm { font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; opacity: .9; }
+
+        .srv-list { display: flex; flex-direction: column; gap: 16px; }
+        .srv-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px; border: 1px solid #eee; border-radius: 8px; transition: var(--t); }
+        .srv-item:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(201,166,64,.10); }
+        .srv-item-icon { flex-shrink: 0; width: 46px; height: 46px; background: rgba(201,166,64,.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .srv-item-icon i { font-size: 1.2rem; color: var(--gold); }
+        .srv-item-title { font-family: 'Montserrat', sans-serif; font-size: .92rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+        .srv-item-desc { font-size: .82rem; color: var(--gray); }
+
+        /* ================================================
+           OCCASIONS
+        ================================================ */
+        .occ-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 36px; }
+        .ocard { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--t); }
+        .ocard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .ocard-img { height: 174px; background: linear-gradient(135deg, #242424, #363636); display: flex; align-items: center; justify-content: center; position: relative; }
+        .ocard-img i { font-size: 3.8rem; color: var(--gold); opacity: .7; }
+        .ostatus { position: absolute; top: 10px; left: 10px; font-family: 'Montserrat', sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+        .s-avail { background: #27ae60; color: #fff; }
+        .s-res   { background: #e67e22; color: #fff; }
+        .ocard-body { padding: 18px 18px 22px; }
+        .omodel { font-family: 'Montserrat', sans-serif; font-size: .98rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+        .ospecs { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+        .ospec { display: flex; align-items: center; gap: 5px; font-size: .76rem; color: var(--gray); }
+        .ospec i { color: var(--gold); font-size: .78rem; }
+        .oprice { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--gold); margin-bottom: 14px; }
+        .oprice .cur { font-size: .78rem; color: var(--gray); font-weight: 400; margin-left: 4px; }
+
+        /* ================================================
+           RENDEZ-VOUS
+        ================================================ */
+        #rendez-vous { background: var(--dark-2); padding: 90px 0; }
+        .rdv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+
+        .rdv-info h3 { font-size: 1.75rem; color: var(--white); line-height: 1.3; margin-bottom: 14px; }
+        .rdv-info h3 span { color: var(--gold); }
+        .rdv-info p { color: rgba(255,255,255,.65); margin-bottom: 32px; line-height: 1.85; font-size: .92rem; }
+
+        .clist { display: flex; flex-direction: column; gap: 16px; }
+        .citem { display: flex; align-items: center; gap: 14px; color: rgba(255,255,255,.8); font-size: .88rem; }
+        .citem-icon { flex-shrink: 0; width: 40px; height: 40px; background: rgba(201,166,64,.13); border: 1px solid rgba(201,166,64,.28); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .citem-icon i { color: var(--gold); font-size: .88rem; }
+        .citem-label { font-size: .72rem; color: rgba(255,255,255,.4); display: block; margin-top: 1px; }
+
+        .rdv-form { background: var(--white); border-radius: 10px; padding: 38px; box-shadow: 0 24px 64px rgba(0,0,0,.3); }
+        .form-title { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .form-sub { font-size: .83rem; color: var(--gray); margin-bottom: 26px; }
+        .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .fg { margin-bottom: 14px; }
+        .fg label { display: block; font-family: 'Montserrat', sans-serif; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--dark); margin-bottom: 5px; }
+        .fg input, .fg select, .fg textarea {
+            width: 100%; padding: 11px 13px;
+            font-family: 'Open Sans', sans-serif; font-size: .88rem; color: var(--dark);
+            background: var(--light); border: 1.5px solid #e0e0e0; border-radius: var(--r);
+            outline: none; transition: var(--t); appearance: none;
+        }
+        .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); background: var(--white); box-shadow: 0 0 0 3px rgba(201,166,64,.12); }
+        .fg textarea { resize: vertical; min-height: 88px; }
+        .btn-full { width: 100%; text-align: center; margin-top: 6px; }
+
+        /* ================================================
+           FOOTER
+        ================================================ */
+        footer { background: #141414; color: rgba(255,255,255,.6); padding: 60px 0 0; }
+        .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+
+        .ft-brand .logo { margin-bottom: 16px; display: inline-flex; }
+        .ft-desc { font-size: .83rem; line-height: 1.85; color: rgba(255,255,255,.45); margin-bottom: 22px; }
+        .socials { display: flex; gap: 9px; }
+        .soc { width: 34px; height: 34px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.55); font-size: .82rem; transition: var(--t); }
+        .soc:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+
+        .ft-col h4 { font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; padding-bottom: 10px; position: relative; }
+        .ft-col h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 28px; height: 2px; background: var(--gold); }
+        .ft-links { display: flex; flex-direction: column; gap: 9px; }
+        .ft-links a { font-size: .83rem; color: rgba(255,255,255,.45); transition: var(--t); display: flex; align-items: center; gap: 6px; }
+        .ft-links a::before { content: '›'; color: var(--gold); }
+        .ft-links a:hover { color: var(--gold); padding-left: 4px; }
+
+        .ft-clist { display: flex; flex-direction: column; gap: 12px; }
+        .ft-clist li { display: flex; gap: 10px; font-size: .81rem; color: rgba(255,255,255,.45); }
+        .ft-clist li i { color: var(--gold); flex-shrink: 0; margin-top: 3px; }
+
+        .ft-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 18px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .ft-bottom p { font-size: .76rem; color: rgba(255,255,255,.3); }
+        .ft-legal { display: flex; gap: 18px; }
+        .ft-legal a { font-size: .76rem; color: rgba(255,255,255,.3); transition: var(--t); }
+        .ft-legal a:hover { color: var(--gold); }
+
+        /* ================================================
+           SCROLL-TO-TOP
+        ================================================ */
+        .scroll-top { position: fixed; bottom: 22px; right: 22px; width: 42px; height: 42px; background: var(--gold); color: var(--white); border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 18px rgba(201,166,64,.45); opacity: 0; transform: translateY(14px); transition: var(--t); z-index: 999; }
+        .scroll-top.show { opacity: 1; transform: none; }
+        .scroll-top:hover { background: var(--gold-dark); transform: translateY(-3px); }
+
+        /* ================================================
+           RESPONSIVE
+        ================================================ */
+        @media (max-width: 1024px) {
+            .gamme-grid, .occ-grid { grid-template-columns: repeat(2,1fr); }
+            .ft-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+        }
         @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            .nav-links, .btn-rdv {
-                display: none;
-                pointer-events: none;
+            .hamburger { display: flex; background: var(--white); height: 100%; }
+            .nav-body {
+                position: fixed; top: 80px; left: 0; right: 0; bottom: 0;
+                background: var(--white); flex-direction: column; justify-content: flex-start;
+                align-items: center; padding: 36px 24px; gap: 6px;
+                transform: translateX(100%); transition: transform .3s ease; overflow-y: auto;
             }
-            .nav-links.mobile-open {
-                display: flex;
-                flex-direction: column;
-                position: fixed;
-                top: var(--nav-h);
-                left: 0; right: 0; bottom: 0;
-                background: var(--white);
-                align-items: center;
-                justify-content: center;
-                gap: 4px;
-                pointer-events: all;
-                z-index: 99;
-            }
-            .nav-links.mobile-open .nav-link { font-size: 1rem; padding: 14px 24px; }
-            .nav-links.mobile-open li + li::before { display: none; }
-            .footer .container { justify-content: center; text-align: center; }
-            .footer-contact { justify-content: center; }
+            .nav-body.open { transform: translateX(0); }
+            .nav-links { flex-direction: column; align-items: center; margin-bottom: 24px; }
+            .nav-links li::after { display: none; }
+            .nav-link { font-size: .95rem; padding: 12px 20px; }
+            .nav-brand { padding: 0 28px 0 18px; }
+            .logo-img { height: 50px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .gamme-grid, .occ-grid { grid-template-columns: 1fr; }
+            .srv-grid { grid-template-columns: 1fr; }
+            .srv-img-wrap { display: none; }
+            .rdv-grid { grid-template-columns: 1fr; }
+            .frow { grid-template-columns: 1fr; }
+            .ft-grid { grid-template-columns: 1fr; gap: 28px; }
+            .ft-bottom { flex-direction: column; text-align: center; }
+            .hero-stats { gap: 28px; }
         }
-
         @media (max-width: 480px) {
-            .hero-btns { flex-direction: column; align-items: stretch; }
-            .btn-hero-gold, .btn-hero-outline { text-align: center; }
+            .hero-btns { flex-direction: column; }
+            .btn { text-align: center; }
+            .section { padding: 64px 0; }
         }
     </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════
      NAVBAR
-════════════════════════════════════════ -->
-<nav class="navbar">
-    <div class="container">
+══════════════════════════════ -->
+<nav class="navbar" id="navbar">
 
-        <!-- LOGO — badge ovale or -->
-        <a href="#hero" class="logo" aria-label="MADA LIFT Accueil">
-            <svg viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer oval -->
-                <ellipse cx="65" cy="39" rx="62" ry="36" stroke="#C9A640" stroke-width="2"/>
-                <!-- Inner oval (double border effect) -->
-                <ellipse cx="65" cy="39" rx="57" ry="31" stroke="#C9A640" stroke-width=".8" opacity=".5"/>
-                <!-- Decorative top line -->
-                <line x1="28" y1="22" x2="102" y2="22" stroke="#C9A640" stroke-width=".6" opacity=".35"/>
-                <!-- Decorative bottom line -->
-                <line x1="28" y1="56" x2="102" y2="56" stroke="#C9A640" stroke-width=".6" opacity=".35"/>
-                <!-- "Mada" script text -->
-                <text x="65" y="44"
-                      text-anchor="middle"
-                      font-family="Georgia, 'Times New Roman', serif"
-                      font-size="24"
-                      font-style="italic"
-                      font-weight="700"
-                      fill="#C9A640"
-                      letter-spacing="-1">Mada</text>
-                <!-- "LIFT" uppercase small -->
-                <text x="65" y="57"
-                      text-anchor="middle"
-                      font-family="'Montserrat', Arial, sans-serif"
-                      font-size="8.5"
-                      font-weight="700"
-                      fill="#C9A640"
-                      letter-spacing="5">LIFT</text>
-                <!-- ® symbol -->
-                <text x="101" y="20"
-                      font-family="Arial, sans-serif"
-                      font-size="8"
-                      fill="#C9A640">®</text>
-            </svg>
+    <!-- ░ Section sombre — logo -->
+    <div class="nav-brand">
+        <a href="#accueil" class="logo" aria-label="MADA LIFT — Accueil">
+            <img class="logo-img" src="assets/logo.svg" alt="MADA LIFT Logo">
         </a>
+    </div>
 
-        <!-- NAV LINKS -->
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#hero"      class="nav-link active">ACCUEIL</a></li>
+    <!-- ░ Section blanche — liens + CTA -->
+    <div class="nav-body" id="navBody">
+        <ul class="nav-links">
+            <li><a href="#accueil"   class="nav-link active">ACCUEIL</a></li>
             <li><a href="#gamme"     class="nav-link">NOTRE GAMME</a></li>
             <li><a href="#services"  class="nav-link">SERVICES</a></li>
             <li><a href="#occasions" class="nav-link">OCCASIONS</a></li>
             <li><a href="#contact"   class="nav-link">CONTACT</a></li>
         </ul>
-
-        <!-- CTA -->
-        <a href="#contact" class="btn-rdv">PRENDRE RENDEZ-VOUS</a>
-
-        <!-- Hamburger -->
-        <button class="hamburger" id="ham" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-
+        <a href="#rendez-vous" class="btn btn-gold">PRENDRE RENDEZ-VOUS</a>
     </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+
 </nav>
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════
      HERO
-════════════════════════════════════════ -->
-<section id="hero">
-    <div class="hero-inner">
-        <h1 class="hero-title">
-            L'EXCELLENCE EN MANUTENTION<br>À MADAGASCAR
-        </h1>
-        <p class="hero-sub">
-            Vente, Location, Maintenance de Chariots Élévateurs<br>
-            et Équipements de Levage.
-        </p>
-        <div class="hero-btns">
-            <a href="#gamme"   class="btn-hero-gold">VOIR NOS MODÈLES</a>
-            <a href="#contact" class="btn-hero-outline">DEMANDER UN DEVIS</a>
-        </div>
-    </div>
-</section>
-
-<!-- ════════════════════════════════════════
-     3 CARDS
-════════════════════════════════════════ -->
-<section class="cards-section" id="gamme">
-    <div class="cards-row">
-
-        <a href="#gamme-detail" class="card">
-            <div class="card-icon">
-                <i class="fas fa-warehouse"></i>
-            </div>
-            <div class="card-body">
-                <div class="card-title">Vente Neuf<br>&amp; Occasion</div>
-                <p class="card-text">Large choix de modèles adaptés.</p>
-                <span class="card-more">EN SAVOIR PLUS <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></span>
-            </div>
-        </a>
-
-        <a href="#services" class="card">
-            <div class="card-icon">
-                <i class="fas fa-screwdriver-wrench"></i>
-            </div>
-            <div class="card-body">
-                <div class="card-title">Service<br>Maintenance</div>
-                <p class="card-text">Interventions rapides et pièces d'origine.</p>
-                <span class="card-more">EN SAVOIR PLUS <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></span>
-            </div>
-        </a>
-
-        <a href="#location" class="card">
-            <div class="card-icon">
-                <i class="fas fa-calendar-days"></i>
-            </div>
-            <div class="card-body">
-                <div class="card-title">Location<br>Fluide</div>
-                <p class="card-text">Solutions flexibles courte et longue durée.</p>
-                <span class="card-more">EN SAVOIR PLUS <i class="fas fa-arrow-right" style="font-size:.6rem;"></i></span>
-            </div>
-        </a>
-
-    </div>
-</section>
-
-<!-- ════════════════════════════════════════
-     FOOTER STRIP
-════════════════════════════════════════ -->
-<footer class="footer" id="contact">
+══════════════════════════════ -->
+<section id="accueil">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
     <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                L'EXCELLENCE EN MANUTENTION<br>À MADAGASCAR
+            </h1>
+            <p class="hero-sub">
+                Vente, Location, Maintenance de Chariots Élévateurs<br>
+                et Équipements de Levage.
+            </p>
+            <div class="hero-btns">
+                <a href="#gamme"       class="btn btn-gold">VOIR NOS MODÈLES</a>
+                <a href="#rendez-vous" class="btn btn-outline">DEMANDER UN DEVIS</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div class="footer-contact">
-            <span>CONTMIT MADA LIFT</span>
-            <span class="footer-sep">|</span>
-            <span><i class="fas fa-phone"></i>+33 349 21 79</span>
-            <span class="footer-sep">|</span>
-            <span><i class="fas fa-phone"></i>+44 (13) 238 39 19</span>
+<!-- ══════════════════════════════
+     SERVICE CARDS
+══════════════════════════════ -->
+<div class="cards-strip">
+    <div class="container">
+        <div class="cards-grid">
+            <a href="#gamme" class="scard fade">
+                <div class="scard-icon"><i class="fas fa-warehouse"></i></div>
+                <div>
+                    <div class="scard-title">Vente Neuf<br>&amp; Occasion</div>
+                    <p class="scard-text">Large choix de modèles adaptés à tous vos besoins industriels.</p>
+                    <span class="scard-link">EN SAVOIR PLUS <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="#services" class="scard fade">
+                <div class="scard-icon"><i class="fas fa-wrench"></i></div>
+                <div>
+                    <div class="scard-title">Service<br>Maintenance</div>
+                    <p class="scard-text">Interventions rapides et pièces d'origine pour vos équipements.</p>
+                    <span class="scard-link">EN SAVOIR PLUS <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="#services" class="scard fade">
+                <div class="scard-icon"><i class="fas fa-calendar-check"></i></div>
+                <div>
+                    <div class="scard-title">Location<br>Fluide</div>
+                    <p class="scard-text">Solutions flexibles courte et longue durée selon votre activité.</p>
+                    <span class="scard-link">EN SAVOIR PLUS <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════
+     NOTRE GAMME
+══════════════════════════════ -->
+<section id="gamme" class="section bg-light">
+    <div class="container">
+        <div class="section-hd fade">
+            <span class="section-label">Notre Catalogue</span>
+            <h2 class="section-title">Notre <span>Gamme</span> d'Équipements</h2>
+            <p class="section-sub">Des solutions de manutention adaptées à chaque secteur d'activité.</p>
+            <div class="divider"></div>
         </div>
 
-        <div class="footer-socials">
-            <a href="#" class="soc-icon" aria-label="Facebook">  <i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="soc-icon" aria-label="Twitter">   <i class="fab fa-twitter"></i></a>
-            <a href="#" class="soc-icon" aria-label="LinkedIn">  <i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="soc-icon" aria-label="Instagram"> <i class="fab fa-instagram"></i></a>
+        <div class="gamme-grid">
+            <div class="gcard fade">
+                <div class="gcard-img">
+                    <i class="fas fa-truck-moving"></i>
+                    <span>Photo à ajouter</span>
+                    <span class="gbadge">Neuf</span>
+                </div>
+                <div class="gcard-body">
+                    <div class="gcat">Chariot Élévateur</div>
+                    <h3 class="gname">Chariot Frontal Thermique</h3>
+                    <p class="gdesc">Idéal pour les entrepôts et zones extérieures. Robuste, puissant et économique.</p>
+                    <div class="gtags">
+                        <span class="gtag">1.5T – 10T</span>
+                        <span class="gtag">GPL / Diesel</span>
+                        <span class="gtag">Mâts triplex</span>
+                    </div>
+                    <a href="#rendez-vous" class="btn btn-border-gold" style="font-size:.74rem;padding:9px 20px;">DEMANDER UN DEVIS</a>
+                </div>
+            </div>
+
+            <div class="gcard fade">
+                <div class="gcard-img">
+                    <i class="fas fa-bolt"></i>
+                    <span>Photo à ajouter</span>
+                    <span class="gbadge">Neuf</span>
+                </div>
+                <div class="gcard-body">
+                    <div class="gcat">Chariot Élévateur</div>
+                    <h3 class="gname">Chariot Électrique</h3>
+                    <p class="gdesc">Solution silencieuse, zéro émission, idéale pour les espaces intérieurs sensibles.</p>
+                    <div class="gtags">
+                        <span class="gtag">1T – 5T</span>
+                        <span class="gtag">Électrique</span>
+                        <span class="gtag">Batterie Li-ion</span>
+                    </div>
+                    <a href="#rendez-vous" class="btn btn-border-gold" style="font-size:.74rem;padding:9px 20px;">DEMANDER UN DEVIS</a>
+                </div>
+            </div>
+
+            <div class="gcard fade">
+                <div class="gcard-img">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                    <span>Photo à ajouter</span>
+                    <span class="gbadge">Neuf</span>
+                </div>
+                <div class="gcard-body">
+                    <div class="gcat">Équipement de Levage</div>
+                    <h3 class="gname">Chariot Télescopique</h3>
+                    <p class="gdesc">Polyvalent pour chantiers et zones difficiles d'accès. Portée étendue.</p>
+                    <div class="gtags">
+                        <span class="gtag">3T – 20T</span>
+                        <span class="gtag">Diesel</span>
+                        <span class="gtag">Flèche télescopique</span>
+                    </div>
+                    <a href="#rendez-vous" class="btn btn-border-gold" style="font-size:.74rem;padding:9px 20px;">DEMANDER UN DEVIS</a>
+                </div>
+            </div>
         </div>
 
-        <p class="footer-copy">© 2024 MADA LIFT. TOUS DROITS RÉSERVÉS.</p>
+        <div style="text-align:center;margin-top:40px;">
+            <a href="#occasions" class="btn btn-gold">VOIR LES OCCASIONS</a>
+        </div>
+    </div>
+</section>
 
+<!-- ══════════════════════════════
+     SERVICES
+══════════════════════════════ -->
+<section id="services" class="section">
+    <div class="container">
+        <div class="srv-grid">
+            <div>
+                <div style="margin-bottom:36px;" class="fade">
+                    <span class="section-label">Nos Prestations</span>
+                    <h2 class="section-title">Des Services <span>Complets</span><br>à Votre Disposition</h2>
+                    <p class="section-sub" style="margin:0;text-align:left;">Un accompagnement sur mesure, de l'achat à la maintenance.</p>
+                    <div class="divider" style="margin-left:0;"></div>
+                </div>
+                <ul class="srv-list">
+                    <li class="srv-item fade">
+                        <div class="srv-item-icon"><i class="fas fa-tools"></i></div>
+                        <div>
+                            <div class="srv-item-title">Maintenance Préventive</div>
+                            <p class="srv-item-desc">Entretiens planifiés pour garantir la disponibilité et la longévité de vos machines.</p>
+                        </div>
+                    </li>
+                    <li class="srv-item fade">
+                        <div class="srv-item-icon"><i class="fas fa-truck-medical"></i></div>
+                        <div>
+                            <div class="srv-item-title">Intervention d'Urgence</div>
+                            <p class="srv-item-desc">Techniciens disponibles rapidement pour minimiser vos temps d'arrêt.</p>
+                        </div>
+                    </li>
+                    <li class="srv-item fade">
+                        <div class="srv-item-icon"><i class="fas fa-cog"></i></div>
+                        <div>
+                            <div class="srv-item-title">Pièces Détachées d'Origine</div>
+                            <p class="srv-item-desc">Stock de pièces certifiées disponibles pour toutes les marques représentées.</p>
+                        </div>
+                    </li>
+                    <li class="srv-item fade">
+                        <div class="srv-item-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <div class="srv-item-title">Formation des Opérateurs</div>
+                            <p class="srv-item-desc">Formations certifiantes pour la sécurité et l'utilisation optimale des équipements.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="srv-img-wrap fade">
+                <div class="srv-img">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <div class="srv-badge">
+                    <span class="big">24/7</span>
+                    <span class="sm">Support Technique</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     OCCASIONS
+══════════════════════════════ -->
+<section id="occasions" class="section bg-light">
+    <div class="container">
+        <div class="section-hd fade">
+            <span class="section-label">Marché de l'Occasion</span>
+            <h2 class="section-title">Équipements d'<span>Occasion</span></h2>
+            <p class="section-sub">Machines rigoureusement contrôlées et remises en état par nos techniciens certifiés.</p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="occ-grid">
+            <div class="ocard fade">
+                <div class="ocard-img">
+                    <i class="fas fa-truck-moving"></i>
+                    <span class="ostatus s-avail">Disponible</span>
+                </div>
+                <div class="ocard-body">
+                    <h3 class="omodel">Toyota 8FGF25 — 2.5T</h3>
+                    <div class="ospecs">
+                        <span class="ospec"><i class="fas fa-calendar"></i> 2019</span>
+                        <span class="ospec"><i class="fas fa-tachometer-alt"></i> 2 400h</span>
+                        <span class="ospec"><i class="fas fa-gas-pump"></i> GPL</span>
+                    </div>
+                    <div class="oprice">Nous contacter <span class="cur">pour le prix</span></div>
+                    <a href="#rendez-vous" class="btn btn-gold" style="font-size:.74rem;padding:9px 22px;width:100%;text-align:center;">DEMANDER INFO</a>
+                </div>
+            </div>
+
+            <div class="ocard fade">
+                <div class="ocard-img">
+                    <i class="fas fa-bolt"></i>
+                    <span class="ostatus s-avail">Disponible</span>
+                </div>
+                <div class="ocard-body">
+                    <h3 class="omodel">Linde E20PH — 2T Électrique</h3>
+                    <div class="ospecs">
+                        <span class="ospec"><i class="fas fa-calendar"></i> 2020</span>
+                        <span class="ospec"><i class="fas fa-tachometer-alt"></i> 1 800h</span>
+                        <span class="ospec"><i class="fas fa-bolt"></i> Électrique</span>
+                    </div>
+                    <div class="oprice">Nous contacter <span class="cur">pour le prix</span></div>
+                    <a href="#rendez-vous" class="btn btn-gold" style="font-size:.74rem;padding:9px 22px;width:100%;text-align:center;">DEMANDER INFO</a>
+                </div>
+            </div>
+
+            <div class="ocard fade">
+                <div class="ocard-img">
+                    <i class="fas fa-truck-loading"></i>
+                    <span class="ostatus s-res">Réservé</span>
+                </div>
+                <div class="ocard-body">
+                    <h3 class="omodel">Jungheinrich EFG430 — 3T</h3>
+                    <div class="ospecs">
+                        <span class="ospec"><i class="fas fa-calendar"></i> 2018</span>
+                        <span class="ospec"><i class="fas fa-tachometer-alt"></i> 3 100h</span>
+                        <span class="ospec"><i class="fas fa-bolt"></i> Électrique</span>
+                    </div>
+                    <div class="oprice">Nous contacter <span class="cur">pour le prix</span></div>
+                    <a href="#rendez-vous" class="btn btn-border-gold" style="font-size:.74rem;padding:9px 22px;width:100%;text-align:center;">LISTE D'ATTENTE</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center;">
+            <a href="#rendez-vous" class="btn btn-border-gold">VOIR TOUT LE STOCK</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     RENDEZ-VOUS / CONTACT
+══════════════════════════════ -->
+<section id="rendez-vous">
+    <div class="container">
+        <div class="rdv-grid">
+            <div class="fade">
+                <ul class="clist">
+                    <li class="citem">
+                        <div class="citem-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <strong>+261 34 04 953 53</strong>
+                            <span class="citem-label">Lun – Sam, 8h – 17h</span>
+                        </div>
+                    </li>
+                    <li class="citem">
+                        <div class="citem-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <strong>contact@mada-lift.mg</strong>
+                            <span class="citem-label">Réponse sous 24h ouvrées</span>
+                        </div>
+                    </li>
+                    <li class="citem">
+                        <div class="citem-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <strong>Antananarivo, Madagascar</strong>
+                            <span class="citem-label">Zone Industrielle</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rdv-form fade">
+                <div class="form-title">Formulaire de Contact</div>
+                <p class="form-sub">Remplissez ce formulaire — nous vous répondons sous 24h ouvrées.</p>
+
+                <form id="contactForm" onsubmit="submitForm(event)">
+                    <div class="frow">
+                        <div class="fg">
+                            <label for="prenom">Prénom *</label>
+                            <input type="text" id="prenom" placeholder="Jean" required>
+                        </div>
+                        <div class="fg">
+                            <label for="nom">Nom *</label>
+                            <input type="text" id="nom" placeholder="Dupont" required>
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" placeholder="jean@entreprise.com" required>
+                    </div>
+                    <div class="fg">
+                        <label for="tel">Téléphone</label>
+                        <input type="tel" id="tel" placeholder="+261 XX XXX XXX">
+                    </div>
+                    <div class="fg">
+                        <label for="sujet">Objet de la demande</label>
+                        <select id="sujet">
+                            <option value="">Sélectionnez...</option>
+                            <option>Devis — Achat de matériel</option>
+                            <option>Devis — Location</option>
+                            <option>Service de Maintenance</option>
+                            <option>Équipement d'Occasion</option>
+                            <option>Autre demande</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Décrivez votre besoin..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gold btn-full">
+                        <i class="fas fa-paper-plane" style="margin-right:8px;"></i>ENVOYER MA DEMANDE
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact" style="display:none;"></section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+    <div class="container">
+        <div class="ft-grid">
+            <div class="ft-brand">
+                <a href="#accueil" class="logo" aria-label="MADA LIFT — Accueil">
+                    <img class="logo-img" src="assets/logo.svg" alt="MADA LIFT Logo">
+                </a>
+                <p class="ft-desc">Votre partenaire de confiance pour la vente, la location et la maintenance d'équipements de manutention à Madagascar depuis plus de 15 ans.</p>
+                <div class="socials">
+                    <a href="#" class="soc" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="soc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="soc" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="soc" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="ft-col">
+                <h4>Navigation</h4>
+                <ul class="ft-links">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#gamme">Notre Gamme</a></li>
+                    <li><a href="#services">Nos Services</a></li>
+                    <li><a href="#occasions">Occasions</a></li>
+                    <li><a href="#rendez-vous">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="ft-col">
+                <h4>Services</h4>
+                <ul class="ft-links">
+                    <li><a href="#services">Maintenance</a></li>
+                    <li><a href="#gamme">Vente Neuf</a></li>
+                    <li><a href="#occasions">Vente Occasion</a></li>
+                    <li><a href="#services">Location</a></li>
+                    <li><a href="#services">Formation</a></li>
+                </ul>
+            </div>
+
+            <div class="ft-col">
+                <h4>Contact</h4>
+                <ul class="ft-clist">
+                    <li><i class="fas fa-map-marker-alt"></i> Zone Industrielle, Antananarivo, Madagascar</li>
+                    <li><i class="fas fa-phone"></i> +261 34 04 953 53</li>
+                    <li><i class="fas fa-envelope"></i> contact@mada-lift.mg</li>
+                    <li><i class="fas fa-clock"></i> Lun – Sam : 8h00 – 17h00</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ft-bottom">
+            <p>© 2024 MADA LIFT. TOUS DROITS RÉSERVÉS.</p>
+            <div class="ft-legal">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Confidentialité</a>
+                <a href="#">CGV</a>
+            </div>
+        </div>
     </div>
 </footer>
 
-<!-- ════════════════════════════════════════
-     JS
-════════════════════════════════════════ -->
+<button class="scroll-top" id="scrollTop" aria-label="Haut de page">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
 <script>
     /* Hamburger */
-    const ham   = document.getElementById('ham');
-    const links = document.getElementById('navLinks');
+    const ham  = document.getElementById('hamburger');
+    const body = document.getElementById('navBody');
     ham.addEventListener('click', () => {
         ham.classList.toggle('open');
-        links.classList.toggle('mobile-open');
+        body.classList.toggle('open');
     });
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        ham.classList.remove('open');
-        links.classList.remove('mobile-open');
-    }));
+    document.querySelectorAll('.nav-link, .nav-body .btn').forEach(el =>
+        el.addEventListener('click', () => { ham.classList.remove('open'); body.classList.remove('open'); })
+    );
 
     /* Active nav on scroll */
-    const navAs = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-        const y = window.scrollY + 80;
-        document.querySelectorAll('section[id], footer[id]').forEach(s => {
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    function setActiveNav() {
+        const y = window.pageYOffset + 90;
+        sections.forEach(s => {
             if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight)
-                navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + s.id));
+                navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + s.id));
         });
+    }
+
+    /* Scroll-to-top */
+    const topBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        setActiveNav();
+        topBtn.classList.toggle('show', window.pageYOffset > 380);
     });
+    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* Fade-in on scroll */
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.13 });
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+
+    /* Form submit */
+    function submitForm(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check" style="margin-right:8px;"></i>MESSAGE ENVOYÉ !';
+        btn.style.cssText = 'background:#27ae60;border-color:#27ae60;pointer-events:none;';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.cssText = ''; e.target.reset(); }, 4000);
+    }
 </script>
 </body>
 </html>
